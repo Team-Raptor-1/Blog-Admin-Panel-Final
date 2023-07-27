@@ -70,13 +70,13 @@ const SideBar = () => {
 
                 <div className="elements">
                     <FiSettings />
-                    <div className="elements">
-                    <BiComment />
+                    
+                 
                     <li><Link id='all' to="/settings"><h3>Settings</h3></Link></li>
                 </div>
 
                 </div>
-            </div>
+            
         </section>
     )
 }
