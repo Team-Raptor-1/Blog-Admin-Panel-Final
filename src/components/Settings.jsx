@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../styles/Settings.css';
 import { BiUser } from "react-icons/bi";
 import { BsKeyFill } from "react-icons/bs";
+import Swal from 'sweetalert2';
 
 const Settings = () => {
     const [oldUsername, setOldUsername] = useState('');
@@ -31,14 +32,30 @@ const Settings = () => {
         console.log('Old Password:', oldPassword);
         console.log('New Password:', newPassword);
 
-        alert("Username and Password has been changed.")
+        updation();
 
         setOldUsername('');
         setNewUsername('');
         setOldPassword('');
         setNewPassword('');
     };
+    
+    const updation = () => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Username and Password updated successfully.',
+            showConfirmButton: true
+          })
+    }
 
+    const showError = () => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please fill all the fields.',
+          })
+    }
+ 
     return (
         <div className="App1">
             <div className='H1'><h1>Hello!</h1></div>
@@ -61,7 +78,7 @@ const Settings = () => {
                     <input
                         type="text"
                         value={newUsername}
-                        onChange={(e) => setOldUsername(e.target.value)}
+                        onChange={handleUsernameChange}
                     />
                     </div>
                 </div>
@@ -70,9 +87,9 @@ const Settings = () => {
                     <label>Old Password </label>
                     <div className='input-settings'>
                     <input
-                        type="text"
+                        type="password"
                         value={oldPassword}
-                        onChange={(e) => setOldUsername(e.target.value)}
+                        onChange={(e) => setOldPassword(e.target.value)}
                     />
                     </div>
                 </div>
@@ -80,20 +97,14 @@ const Settings = () => {
                     <label>New Password </label>
                     <div className='input-settings'>
                     <input
-                        type="text"
+                        type="password"
                         value={newPassword}
-                        onChange={(e) => setOldUsername(e.target.value)}
+                        onChange={handlePasswordChange}
                     />
                     </div>
                 </div>
-                <button type="submit">Update</button>
+                <button onClick={showError}>Update</button>
             </form>
-            {showPopup && (
-                <div className="popup">
-                    <p>Please fill in all the fields.</p>
-                    <button onClick={() => setShowPopup(false)}>Okay</button>
-                </div>
-            )}
         </div>
     );
 };
